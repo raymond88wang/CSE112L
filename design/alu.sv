@@ -1,10 +1,7 @@
 module alu_32(
     input logic [31:0] A, B,
     input logic [1:0] opcode,
-    output logic overflow,
-    output logic c_out,
-    output logic negative,
-	output logic zero,
+    output logic [3:0] ALUFlags,
     output logic [31:0] result
     );
 
@@ -16,6 +13,7 @@ begin
 	c_out = 1'b0;
 	negative = 1'b0;
 	zero = 1'b0;
+	ALUFlags 4'b0000;
 	
 	result = 32'd0;
 	
@@ -120,4 +118,5 @@ begin
 			// equal = 1'b0;
 		// end
 	endcase
+	ALUFlags = {overflow, c_out, negative, zero};
 end
