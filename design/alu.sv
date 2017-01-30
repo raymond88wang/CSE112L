@@ -1,4 +1,4 @@
-module alu_32(
+module alu(
     input logic [31:0] A, B,
     input logic [1:0] opcode,
     output logic [3:0] ALUFlags,
@@ -9,10 +9,10 @@ module alu_32(
 always_comb 
 begin
 	//flags
-	overflow = 1'b0;
-	c_out = 1'b0;
-	negative = 1'b0;
-	zero = 1'b0;
+	bit overflow = 1'b0;
+	bit c_out = 1'b0;
+	bit negative = 1'b0;
+	bit zero = 1'b0;
 	ALUFlags 4'b0000;
 	
 	result = 32'd0;
@@ -39,7 +39,7 @@ begin
 				overflow = 1'b0;
 			c_out = c_out & ~opcode[1];
 			negative = result[31];
-			zero = ~&result;
+			zero = ~(&result);
 		end
 		// 4'b0010 :   // SUB
 		2'b01 :
@@ -53,7 +53,7 @@ begin
 				overflow = 1'b0;
 			c_out = c_out & ~opcode[1];
 			negative = result[31];
-			zero = ~&result;
+			zero = 	~(&result);
 		end
 		// 4'b0011 :   // COMP
 		// begin
@@ -66,7 +66,7 @@ begin
 				// equal = 1'b0;
 		// end
 		// 4'b0101 :   // AND
-		2'b10
+		2'b10 :
 		begin
 			result = A & B;
 			c_out = 1'b0;
@@ -75,7 +75,7 @@ begin
 			zero = 1'b0;
 		end
 		// 4'b0110 :   // OR
-		2'b11
+		2'b11 :
 		begin
 			result = A | B;
 			c_out = 1'b0;
