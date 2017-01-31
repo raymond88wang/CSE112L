@@ -14,5 +14,4 @@ module top(
     imem imem(PC, Instr);
     
     dmem dmem(clk, MemWrite, DataAdr, WriteData, ReadData);
-    
 endmodule
