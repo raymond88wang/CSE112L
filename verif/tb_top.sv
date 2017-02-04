@@ -8,7 +8,7 @@ module tb_top();
 
 
     // instantiate device to be tested
-    top dut(clk, reset, DataAdr, WriteData, MemWrite);
+    top dut(clk, reset, WriteData, DataAdr, MemWrite);
 
 
     // initialize test
@@ -40,10 +40,10 @@ module tb_top();
             end
         end
     end
-	
-	// Limits sim time to 400ms
-	initial begin
-	#400;
-	$finish;
-	end
+
+    // Limits sim time to 400ns
+    initial begin
+    #400;
+    $finish;
+    end
 endmodule

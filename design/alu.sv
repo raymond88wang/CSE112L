@@ -37,9 +37,9 @@ module alu(
 					overflow = 1'b1;
 				else
 					overflow = 1'b0;
-				c_out = c_out & ~opcode[1];
+				c_out = c_out & opcode[1];
+				zero = ~|result[31];
 				negative = result[31];
-				zero = ~(&result);
 			end
 			// 4'b0010 :   // SUB
 			2'b01 :
@@ -51,9 +51,9 @@ module alu(
 					overflow = 1'b1;
 				else
 					overflow = 1'b0;
-				c_out = c_out & ~opcode[1];
+				c_out = c_out & opcode[1];
+				zero = ~|result[31];
 				negative = result[31];
-				zero = 	~(&result);
 			end
 			// 4'b0011 :   // COMP
 			// begin
